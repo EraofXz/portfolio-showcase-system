@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // load database config to access session
 require_once 'config/db.php';
 // clear all session variables and destroy session

@@ -7,15 +7,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
     exit();
 }
 
-require_once 'db.php';
-include 'header.php';
+require_once 'config/db.php';
+include 'includes/header.php';
 
 $user_id = $_SESSION['user_id'];
 
 // Use SQL JOIN to display combined data using prepared statements
 $query = "SELECT p.id, p.title, p.tech_stack, p.file_path, p.created_at, c.category_name 
-          FROM portfolio_db_projects p
-          JOIN portfolio_db_categories c ON p.category_id = c.id
+          FROM projects p
+          JOIN categories c ON p.category_id = c.id
           WHERE p.user_id = ?
           ORDER BY p.created_at DESC";
 
@@ -79,5 +79,5 @@ $result = $stmt->get_result();
 
 <?php 
 $stmt->close();
-include 'footer.php'; 
+include 'includes/footer.php'; 
 ?>

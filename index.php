@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // load database and session settings
 require_once 'config/db.php';
 // check session and route user to the right page

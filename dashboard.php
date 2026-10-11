@@ -1,11 +1,15 @@
 <?php
-require_once 'includes/header.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Ensure only logged-in users can access this page
-if (!$is_logged_in) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+require_once 'includes/header.php';
 ?>
 
 <div class="container py-4">

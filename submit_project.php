@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
     exit();
 }
 
-require_once 'db.php';
+require_once 'config/db.php';
 $message = '';
 $messageType = '';
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if (move_uploaded_file($fileTmp, $uploadFilePath)) {
                 // Prepared statement for secure database INSERT
-                $stmt = $conn->prepare("INSERT INTO portfolio_db_projects (user_id, category_id, title, description, tech_stack, file_path) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO projects (user_id, category_id, title, description, tech_stack, file_path) VALUES (?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("iissss", $user_id, $category_id, $title, $description, $tech_stack, $uploadFilePath);
                 
                 if ($stmt->execute()) {
@@ -68,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Fetch categories for the select dropdown
-$categoriesResult = $conn->query("SELECT id, category_name FROM portfolio_db_categories");
+$categoriesResult = $conn->query("SELECT id, category_name FROM categories");
 
-include 'header.php';
+include 'includes/header.php';
 ?>
 
 <div class="container mt-5">
@@ -146,4 +146,4 @@ document.getElementById('submitProjectForm').addEventListener('submit', function
 });
 </script>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
