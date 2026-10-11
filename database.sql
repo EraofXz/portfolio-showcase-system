@@ -37,3 +37,7 @@ INSERT INTO `categories` (`category_name`, `description`) VALUES
 ('Internet of Things (IoT)', 'Hardware and software integration projects'),
 ('Mobile Application', 'Native and cross-platform mobile apps for Android and iOS'),
 ('Web Application', 'Full stack web systems built with PHP, MySQL, Bootstrap, AJAX');
+
+-- default admin user (password: admin123)
+INSERT INTO `users` (`full_name`, `email`, `password`, `role`) VALUES
+('System Administrator', 'admin@example.com', '$2y$10$Gd.jKlT/0F7zSlqqJx/4CeKeU6OYeiCq7vPR1Lomi9QiVxu5IWNoa', 'admin');
